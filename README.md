@@ -40,7 +40,7 @@ my_page:
       default: axisPage
 
 my_product_page_data:
-  id: ~
+  id: { primaryKey: true, type: integer, foreignTable: my_page, foreignReference: id, onDelete: cascade, required: true }
   product_id:  { type: integer, foreignTable: my_product, foreignReference: id, onDelete: restrict }
   _propel_behaviors:
     axis_extends: { class_name: MyProductPage, extends: my_page }
