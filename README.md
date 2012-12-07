@@ -37,7 +37,7 @@ my_page:
   _inheritance:
     column:    type
     classes:
-      default: axisPage
+      default: MyPage
 
 my_product_page_data:
   id: { primaryKey: true, type: integer, foreignTable: my_page, foreignReference: id, onDelete: cascade, required: true }
