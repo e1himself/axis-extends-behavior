@@ -126,7 +126,7 @@ class " . $this->getClassname() . " extends " . $baseClassName . "
   public function __call(\$name, \$params)
   {
 
-    if (is_callable(array('$ARFQCN', \$name))) {
+    if (method_exists(array('$ARFQCN', \$name))) {
         if (!\$extension = \$this->get$relationName()) {
             \$extension = new $ARClassName();
             \$this->set$relationName(\$extension);
