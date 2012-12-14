@@ -37,20 +37,25 @@ class AxisExtendsBehaviorSubclassBaseBuilder extends OMBuilder
   protected function addClassOpen(&$script)
   {
     $baseTableName = $this->getTable()->getBehavior(static::HOST_BEHAVIOR_NAME)->getParameter('extends');
-    $baseClassName = $this->getDatabase()->getTable($baseTableName)->getPhpName();
+    $baseTable = $this->getDatabase()->getTable($baseTableName);
+    $baseClassName = $baseTable->getPhpName();
+
+    $absctract = $baseTable->isAbstract() ? 'abstract ' : '';
 
     $script .= "
 /**
-  * Base class that represents an extended object {$this->getClassName()} of a row from the '$baseTableName' table.
-  */
-class " . $this->getClassname() . " extends " . $baseClassName . "
+ * Base class that represents an extended object {$this->getClassName()} of a row from the '$baseTableName' table.
+ *
+ * Virtual methods:
+{$this->generateVirtualMethods()}
+ */
+{$absctract}class " . $this->getClassname() . " extends " . $baseClassName . "
 {
 ";
   }
 
   protected function addClassBody(& $script)
   {
-    $this->addVirtualMethods($script);
     $this->addConstructor($script);
     $this->addObjectCall($script);
   }
@@ -62,9 +67,12 @@ class " . $this->getClassname() . " extends " . $baseClassName . "
 ";
   }
 
-  protected function addVirtualMethods(&$script)
+  /**
+   * @return string
+   */
+  protected function generateVirtualMethods()
   {
-    $script .= "/**\n";
+    $script = '';
 
     foreach ($this->getTable()->getColumns() as $column)
     {
@@ -82,7 +90,9 @@ class " . $this->getClassname() . " extends " . $baseClassName . "
       $script .= " * @method set{$relation}(\${$relation})\n";
     }
 
-    $script .= " */\n";
+    $script .= ' *';
+
+    return $script;
   }
 
   protected function addConstructor(&$script)
