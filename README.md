@@ -36,8 +36,10 @@ my_page:
   type:         { type: varchar }
   _inheritance:
     column:    type
-    classes:
-      default: MyPage
+    # Note: the classes map should be empty to allow extending this class from any plugins 
+    # without modification of main schema.yml file. 
+    # Of course, you can constrain inheritance classes defining key-classes map here if you want.
+    classes:   {} 
 
 my_product_page_data:
   id: { primaryKey: true, type: integer, foreignTable: my_page, foreignReference: id, onDelete: cascade, required: true }
