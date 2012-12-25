@@ -10,6 +10,10 @@ class AxisExtendsBehaviorSubclassStubBuilder extends PHP5ExtensionObjectBuilder
 
   public $overwrite = false;
 
+  public function getPackage()
+  {
+    return $this->getTable()->getBehavior(static::HOST_BEHAVIOR_NAME)->getParameter('package') ?: parent::getPackage();
+  }
   /**
    * Returns the qualified (prefixed) classname that is being built by the current class.
    * This method must be implemented by child classes.

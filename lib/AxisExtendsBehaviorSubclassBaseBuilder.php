@@ -31,7 +31,8 @@ class AxisExtendsBehaviorSubclassBaseBuilder extends OMBuilder
    */
   public function getPackage()
   {
-    return parent::getPackage() . ".om";
+    $package = $this->getTable()->getBehavior(static::HOST_BEHAVIOR_NAME)->getParameter('package') ?: parent::getPackage();
+    return $package.'.om';
   }
 
   protected function addClassOpen(&$script)

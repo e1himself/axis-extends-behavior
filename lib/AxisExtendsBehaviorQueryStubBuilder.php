@@ -56,4 +56,9 @@ class {$this->getClassname()} extends Base{$this->getClassname()} {
 } // " . $this->getClassname() . "
 ";
   }
+
+  public function getPackage()
+  {
+    return $this->getTable()->getBehavior(static::HOST_BEHAVIOR_NAME)->getParameter('package') ?: parent::getPackage();
+  }
 }

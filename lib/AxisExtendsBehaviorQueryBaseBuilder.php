@@ -23,7 +23,8 @@ class AxisExtendsBehaviorQueryBaseBuilder extends QueryInheritanceBuilder
    */
   public function getPackage()
   {
-    return OMBuilder::getPackage().'.om';
+    $package = $this->getTable()->getBehavior(static::HOST_BEHAVIOR_NAME)->getParameter('package') ?: OMBuilder::getPackage();
+    return $package.'.om';
   }
 
   /**
