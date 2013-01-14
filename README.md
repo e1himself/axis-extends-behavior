@@ -41,7 +41,9 @@ my_page:
     # Of course, you can constrain inheritance classes defining key-classes map here if you want.
     classes:   {} 
 
-my_product_page_data:
+# note that extension table name (my_product_page_data) doesn't match 
+# .. generated additional class name (MyProductPage). This is important.
+my_product_page_data: 
   id: { primaryKey: true, type: integer, foreignTable: my_page, foreignReference: id, onDelete: cascade, required: true }
   product_id:  { type: integer, foreignTable: my_product, foreignReference: id, onDelete: restrict }
   _propel_behaviors:
