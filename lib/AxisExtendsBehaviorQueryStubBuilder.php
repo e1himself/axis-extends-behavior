@@ -7,6 +7,12 @@
 class AxisExtendsBehaviorQueryStubBuilder extends OMBuilder
 {
   const HOST_BEHAVIOR_NAME = 'axis_extends';
+
+  /**
+   * Disable overwriting of already generated file
+   * @var bool
+   */
+  public $overwrite = false;
   /**
    * Returns the qualified (prefixed) classname that is being built by the current class.
    * This method must be implemented by child classes.
